@@ -1,6 +1,5 @@
 package MapleAPI.Maple_Api.Controller;
 
-import MapleAPI.Maple_Api.dto.CharacterBasicDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,26 +37,6 @@ public class ExampleController {
                 .bodyToMono(String.class)
                 // 응답 값 출력
                 .doOnNext(response -> System.out.println("응답 값: " + response)) 
-                // 결과를 ResponseEntity타입으로 변형해 결과 확인
-                .map(response -> ResponseEntity.ok(response));
-    }
-
-
-    @GetMapping("/api/CharacterInfo")
-    // Mono(WebClient에서 사용 0 또는 1 개의 값을 가짐. 비동기식 처리에 용이)
-    // 1개 이상일 때는 flux(0개 이상의 데이터)를 사용함
-    public Mono<ResponseEntity<String>> getCharacterInfo(@RequestBody CharacterBasicDto charBasicDto) {
-        // 비동기 GET 요청(get()으로 값 받음)
-        return webClient.get()
-                // 해당 url로 정보 요청
-                .uri(NEXON_API_URL+"character/basic?" + charBasicDto.getCharacter_name())
-                // 보낼 해더값 설정
-                .header("x-nxopen-api-key", API_KEY)
-                // 응답 받아서 응답 처리
-                .retrieve()
-                // 받아온 정보(body가 정보인 듯?)를 String타입으로 변경
-                // .class가 붙는 이유는 제네릭 타입을 지정해 줘야만 한기 때문이라고 함(공부 더 해봐야 할 듯..ㅠ)
-                .bodyToMono(String.class)
                 // 결과를 ResponseEntity타입으로 변형해 결과 확인
                 .map(response -> ResponseEntity.ok(response));
     }
