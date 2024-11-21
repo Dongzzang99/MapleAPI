@@ -14,4 +14,6 @@ function getCharBasic(urlString, ocid){
         resultDiv.innerText = JSON.stringify(data, null, 2);
       })
       .catch(error => console.log("에러: " + error))
+
+
 }
