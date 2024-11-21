@@ -6,5 +6,12 @@ function getCharBasic(urlString, ocid){
 
     fetch(urlString)
       .then(response => {
+        return response.json()
       })
+      .then(data => {
+        console.log(data);
+        const resultDiv = document.getElementById('charInfo');
+        resultDiv.innerText = JSON.stringify(data, null, 2);
+      })
+      .catch(error => console.log("에러: " + error))
 }
