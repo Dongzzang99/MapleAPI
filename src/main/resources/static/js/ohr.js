@@ -18,9 +18,6 @@ document.getElementById('characterForm').addEventListener('submit', async functi
         let ocid = await getCharOcid(urlString);
         // 가져온 식별값으로 작창장비 정보 들고오기
         const equipments = await getCharacterEquipment(ocid);
-        // 장비정보 박스 부모
-        const charInfo = document.getElementById("charInfo");
-        charInfo.innerHTML ="";
          // 들고온 작착장비 렌더링하기
         renderEquiments(equipments);
         // 더보기 버튼 관련 함수 호출
@@ -40,6 +37,9 @@ document.getElementById('characterForm').addEventListener('submit', async functi
 // 현재 모든 장비를 담는 최종 부모도 Js로 생성하고 있어서 추후에 합칠 땐 html 에 먼저 만들어 놓고
 // 아래 함수에 변수로 선언하고 실행될 때 마다  초기화 해줘야함 안그럼 자꾸 쌓임
 function renderEquiments(equipments) {
+    // 장비정보 박스 부모
+    const charEquiInfo = document.getElementById("charEquiInfo");
+    charEquiInfo.innerHTML ="";
     console.log(equipments);
     const len = equipments.length;
 
@@ -152,7 +152,6 @@ function renderEquiments(equipments) {
         AllEquimentsDiv.appendChild(equimentDiv);
     }
     // 모든 장착장비 들고있을 div
-    const charEquiInfo = document.getElementById("charEquiInfo");
     charEquiInfo.appendChild(AllEquimentsDiv);
 
     // 더보기 버튼 추가
