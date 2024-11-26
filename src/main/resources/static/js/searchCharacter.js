@@ -8,6 +8,7 @@ function getCharBasic(urlString, ocid){
       .then(response => {
         return response.json()
       })
+      //then 안에 있는 것들은 then 안에서 끝나기 때문에 마무리 해야함
       .then(data => {
         console.log(data);
         const resultDiv = document.getElementById('charInfo');
