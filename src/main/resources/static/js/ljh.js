@@ -60,7 +60,7 @@ async function getCharBasic(ocid){
         const charBasicDiv = document.createElement('div');
         charBasicDiv.className = 'char_basic';
         // 텍스트 정보 추가
-        charBasicDiv.innerText = `캐릭터 기본 정보:\n${JSON.stringify(data, null, 2)}`;
+        charBasicDiv.innerText = `월드 ${JSON.stringify(data.world_name, null, 1)}`;
 
         // 기존 div에 추가 추가
         document.getElementById('charInfo').appendChild(charBasicDiv);
@@ -95,7 +95,7 @@ async function getCashItemInfo(ocid){
             cashItemDiv.className = 'cashItem';
 
             // 아이템 이름을 추가
-            const cashItemName = document.createElement('h3');
+            const cashItemName = document.createElement('h5');
             cashItemName.innerText = item.cash_item_name;
             cashItemDiv.appendChild(cashItemName);
 
@@ -104,7 +104,7 @@ async function getCashItemInfo(ocid){
                 const itemIcon = document.createElement('img');
                 itemIcon.src = item.cash_item_icon;  // 이미지 URL 설정
                 itemIcon.alt = item.cash_item_name;  // 이미지 대체 텍스트
-                itemIcon.style.width = '100px';  // 이미지 크기 설정 (예시)
+                itemIcon.style.width = '50px';  // 이미지 크기 설정
                 itemIcon.style.height = 'auto';  // 비율 유지
                 cashItemDiv.appendChild(itemIcon); // cashItemDiv 이미지 추가
             }
