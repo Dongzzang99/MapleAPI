@@ -55,7 +55,7 @@ async function getCharInfo(ocid) {
         }
 
          const characterInfoDiv = document.getElementById('character-info');
-
+                characterInfoDiv.innerHTML ="";
                 // 캐릭터 클래스 이름 추가
                 const characterClass = document.createElement('h2');
                 characterClass.textContent = `캐릭터 직업: ${result.character_class}`;
