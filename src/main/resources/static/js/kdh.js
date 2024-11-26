@@ -34,6 +34,7 @@ async function getCharOcid(urlString) {
 
 
 // 저장된 ocid 값을 컨트롤러로 전달
+//전달 받았을때
 async function getCharInfo(ocid) {
     try {
         //get 방식으로 ocid값 전달
@@ -45,14 +46,13 @@ async function getCharInfo(ocid) {
 
 
         // 특정 값을 하나하나 따로 가져오기
-        result.final_stat.forEach(stat => {
-            console.log(`${stat.stat_name}: ${stat.stat_value}`);
-        });
+       // result.final_stat.forEach(stat => {
+       //     console.log(`${stat.stat_name}: ${stat.stat_value}`);
+       // });
         // 특정 값만 출력하고 싶을 경우 (예: 데미지)
-        const damageStat = result.final_stat.find(stat => stat.stat_name === "데미지");
-        if (damageStat) {
-            console.log(`damage: ${damageStat.stat_value}`);
-        }
+        const damage = result.final_stat.find(stat => stat.stat_name === "데미지");
+        //const bossDamage
+        //const finalDamage
 
          const characterInfoDiv = document.getElementById('character-info');
                 characterInfoDiv.innerHTML ="";
@@ -60,6 +60,8 @@ async function getCharInfo(ocid) {
                 const characterClass = document.createElement('h2');
                 characterClass.textContent = `캐릭터 직업: ${result.character_class}`;
                 characterInfoDiv.appendChild(characterClass);
+
+
 
                 // 스탯 정보 추가
                 result.final_stat.forEach(stat => {

@@ -11,7 +11,7 @@ import reactor.core.publisher.Mono;
 @RestController
 public class kdhController {
 
-    private static final String API_KEY = "test_b9c93991b51798b98914437ec5f29f993ef542fc40e4e1b70eb47b6e812b3892efe8d04e6d233bd35cf2fabdeb93fb0d";
+    private static final String API_KEY = "live_ffad0c71b122257961b4ea0a8c596998a97b4b49a1fc8e84ce0fe4eee56decc38aecd546f3deb031c4102ab7e560094d";
     private static final String NEXON_API_URL = "https://open.api.nexon.com/maplestory/v1/";
     private static final String NEXON_API_CHARINFO = "https://open.api.nexon.com/maplestory/v1/character/stat";
 //https://open.api.nexon.com/maplestory/v1/character/basic?ocid=f21eb44c8b7d5c11c9b913363071d54f
