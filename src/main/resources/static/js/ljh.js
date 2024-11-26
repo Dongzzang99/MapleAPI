@@ -11,7 +11,7 @@ document.getElementById('characterForm').addEventListener('submit', function(eve
     // 내용 들어갈 div
     const charInfoDiv = document.getElementById('charInfo');
     // 기존 내용 삭제
-    charInfoDiv.innerHTML = '';
+    charInfoDiv.innerHTML = "";
 
     // 비동기 작업을 처리하는 함수를 호출
     handleCharacterSearch(urlString);
