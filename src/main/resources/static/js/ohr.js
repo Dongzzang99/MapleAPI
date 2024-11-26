@@ -28,7 +28,7 @@ document.getElementById('characterForm').addEventListener('submit', async functi
         adjustButtonWidth();
 
     } catch (error) {
-        console.error("Error fetching OCID:", error);
+       // console.error("Error fetching OCID:", error);
     }
 });
 
@@ -37,10 +37,10 @@ document.getElementById('characterForm').addEventListener('submit', async functi
 // 현재 모든 장비를 담는 최종 부모도 Js로 생성하고 있어서 추후에 합칠 땐 html 에 먼저 만들어 놓고
 // 아래 함수에 변수로 선언하고 실행될 때 마다  초기화 해줘야함 안그럼 자꾸 쌓임
 function renderEquiments(equipments) {
-    // 장비정보 박스 부모
+    // 장비정보들을 담은 박스의 부모
     const charEquiInfo = document.getElementById("charEquiInfo");
     charEquiInfo.innerHTML ="";
-    console.log(equipments);
+   // console.log(equipments);
     const len = equipments.length;
 
     // 장착장비들을 담을 부모 박스
@@ -167,7 +167,7 @@ function renderEquiments(equipments) {
 //잠재 에디 옵션 등급별로 색깔 정해주는 함수
 function optionGradeColor(optionGrade, info) {
 
-    console.log(optionGrade,info);
+   // console.log(optionGrade,info);
     if (optionGrade) {
         if (optionGrade == "레어") {
             info.style.color = "blue";
@@ -198,7 +198,7 @@ async function getCharacterEquipment(ocid) {
         return equipments;
     }
     catch (error) {
-        console.error("Error in getCharacterEquipment:", error);
+       // console.error("Error in getCharacterEquipment:", error);
     }
 }
 
@@ -210,7 +210,7 @@ async function getCharOcid(urlString) {
         const data = await response.json(); // JSON으로 변환 완료까지 기다림
         return data.ocid; // ocid 값을 반환
     } catch (error) {
-        console.error("Error in getCharOcid:", error);
+       // console.error("Error in getCharOcid:", error);
         throw error; // 호출한 함수로 에러 전달
     }
 }
