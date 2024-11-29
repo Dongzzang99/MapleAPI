@@ -25,15 +25,14 @@ document.getElementById('characterForm').addEventListener('submit', async functi
 //fetch 호출 순서 관리 함수
 async function handleCharacterSearch(urlString) {
     try {
-        // getCharOcid을 호출하고 결과를 기다림
         const ocid = await getCharOcid(urlString);
-        // getCharBasic이 완료될 때까지 대기
         const CharBasicData = await getCharBasic(ocid);
-        // getCashItemInfo가 완료될 때까지 대기
         const CashItemInfoData = await getCashItemInfo(ocid);
+        const CharPopularity = await getPopularity(ocid);
+        const CharBeautyEquip = await getBeautyEquip(ocid);
 
-        await renderCharBasic(CharBasicData);
-        await renderCashItemInfo(CashItemInfoData);
+        await renderCharBasic(CharBasicData, CharPopularity);
+        await renderCashItemInfo(CashItemInfoData, CharBeautyEquip);
 
     } catch (error) {
         console.error("에러 발생:", error);
@@ -71,8 +70,8 @@ async function getCharBasic(ocid){
 }
 
 
-//캐릭터 기본정보 랜더링
-async function renderCharBasic(CharBasicData){
+//캐릭터 기본정보 + 인기도 랜더링
+async function renderCharBasic(CharBasicData, CharPopularity){
     // 'charInfo' div에서 기존 'char_basic' div 찾기
     let charBasicDiv = document.querySelector('.char_basic');
     let charImgDiv = document.querySelector('.char_img_div');
@@ -93,7 +92,7 @@ async function renderCharBasic(CharBasicData){
     charImg.style.height = 'auto';  // 비율 유지
     charImgDiv.appendChild(charImg); // cashItemDiv 이미지 추가
 
-    // 캐릭터 기본정보
+    // 캐릭터 기본정보 + 인기도
     if(!charBasicDiv){
         charBasicDiv = document.createElement('div');
         charBasicDiv.className = 'char_basic';
@@ -107,7 +106,15 @@ async function renderCharBasic(CharBasicData){
     // 두 날짜 간의 차이 계산
     const timeDifference = currentDate - createDate;
     // 일 단위로 변환(밀리초 * 초 * 분 * 시간) - 일,년 추가로 넣어서 설정
-    const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24 * 365));
+
+    let in7access = null
+    // 7일 이내 접속 여부
+    if(CharBasicData.access_flag == true) {
+        in7access = "O"
+    } else {
+        in7access = "X"
+    }
 
     const basicInfoList = [
         { label: "이름", value: CharBasicData.character_name },
@@ -115,8 +122,9 @@ async function renderCharBasic(CharBasicData){
         { label: "직업", value: CharBasicData.character_class },
         { label: "level", value: CharBasicData.character_level },
         { label: "길드", value: CharBasicData.character_guild_name },
-        { label: "나이", value: `${daysDifference}일` },
-        { label: "최근 접속여부", value: CharBasicData.access_flag }
+        { label: "나이", value: `만 ${daysDifference}세` },
+        { label: "인기도", value: CharPopularity.popularity },
+        { label: "7일 이내 접속", value: in7access }
     ];
 
     charBasicDiv.innerHTML = "";
@@ -152,13 +160,29 @@ async function getCashItemInfo(ocid){
     }
 }
 
-//장착 캐쉬탬 정보 랜더링
-async function renderCashItemInfo(CashItemInfoData){
+//장착 헤어,성형,피부 정보 가져옴
+async function getBeautyEquip(ocid){
+    try {
+        // 컨트롤러에 전송할 url(ocid)
+        const urlString = `/api/getBeautyEquip?ocid=${encodeURIComponent(ocid)}`;
+        const response = await fetch(urlString); // fetch 사용
+        const data = await response.json();      // 응답을 JSON으로 변환
+
+        return data;
+        }
+        catch (error) {
+        console.error("getBeautyEquip 에러:", error);
+        throw error;
+    }
+}
+
+
+//장착 캐쉬탬 + 헤어,성형,피부 정보 랜더링
+async function renderCashItemInfo(CashItemInfoData) {
     // 'charInfo' div에서 기존 'char_cashItem' div 찾기
     let charCashItemDiv = document.querySelector('.char_cashItem');
-
-    // 데이터에서 cash_item_equipment_preset를 가져와서 각 아이템에 대해 처리
-    const cashItems = CashItemInfoData.cash_item_equipment_preset_1;
+    let cashItemsPre = CashItemInfoData.cash_item_equipment_base;
+    let adCashItemsPre = CashItemInfoData.additional_cash_item_equipment_base;
 
     // 기존 div없으면 생성
     if (!charCashItemDiv) {
@@ -168,29 +192,95 @@ async function renderCashItemInfo(CashItemInfoData){
     }
 
     charCashItemDiv.innerHTML = "";
-    cashItems.forEach(item => {
 
-        // 아이템 부위
-        const cashItemSlot = document.createElement('div');
-        cashItemSlot.className = 'cashItem_slot'
-        charCashItemDiv.appendChild(cashItemSlot);
-        cashItemSlot.innerText = `${item.cash_item_equipment_slot}`
-        // 아이템 이름을 추가
-        const cashItemName = document.createElement('div');
-        cashItemName.className = 'cashItem_name'
-        charCashItemDiv.appendChild(cashItemName);
-        cashItemName.innerText = `${JSON.stringify(item.cash_item_name)}`;
+    //제로, 앤젤릭버스터 구분
+    if(CashItemInfoData.character_look_mode == 0){
+        if(CashItemInfoData.preset_no == 1){
+            cashItemsPre = CashItemInfoData.cash_item_equipment_preset_1;
+            console.log("1pre");
+        } else if(CashItemInfoData.preset_no == 2){
+            cashItemsPre = CashItemInfoData.cash_item_equipment_preset_2;
+            console.log("2pre");
+        } else if(CashItemInfoData.preset_no == 3){
+            cashItemsPre = CashItemInfoData.cash_item_equipment_preset_3;
+            console.log("3pre");
+        } else {
+            console.log("no pre");
+        }
 
-//        // 아이템 이미지 추가
-//        if (item.cash_item_icon) {
-//            const itemIcon = document.createElement('img');
-//            itemIcon.src = item.cash_item_icon;  // 이미지 URL 설정
-//            itemIcon.alt = item.cash_item_name;  // 이미지 대체 텍스트
-//            itemIcon.style.width = '50px';  // 이미지 크기 설정
-//            itemIcon.style.height = 'auto';  // 비율 유지
-//            cashItemDiv.appendChild(itemIcon); // cashItemDiv 이미지 추가
-//        }
-    });
+        cashItemsPre.forEach(item => {
+
+            // 아이템 부위
+            const cashItemSlot = document.createElement('div');
+            cashItemSlot.className = 'cashItem_slot'
+            charCashItemDiv.appendChild(cashItemSlot);
+            cashItemSlot.innerText = `${item.cash_item_equipment_slot}`
+            // 아이템 이름을 추가
+            const cashItemName = document.createElement('div');
+            cashItemName.className = 'cashItem_name'
+            charCashItemDiv.appendChild(cashItemName);
+            cashItemName.innerText = `${JSON.stringify(item.cash_item_name)}`;
+        });
+    } else{
+        if(CashItemInfoData.preset_no == 1){
+            adCashItemsPre = CashItemInfoData.additional_cash_item_equipment_preset_1;
+            cashItemsPre = CashItemInfoData.cash_item_equipment_preset_1;
+            console.log("ad_1pre");
+        } else if(CashItemInfoData.preset_no == 2){
+            adCashItemsPre = CashItemInfoData.additional_cash_item_equipment_preset_2;
+            cashItemsPre = CashItemInfoData.cash_item_equipment_preset_2;
+            console.log("ad_2pre");
+        } else if(CashItemInfoData.preset_no == 3){
+            adCashItemsPre = CashItemInfoData.additional_cash_item_equipment_preset_3;
+            cashItemsPre = CashItemInfoData.cash_item_equipment_preset_3;
+            console.log("ad_3pre");
+        } else {
+            cashItemsPre = CashItemInfoData.cash_item_equipment_base;
+            adCashItemsPre = CashItemInfoData.additional_cash_item_equipment_base;
+            console.log("no ad_pre");
+        }
+        cashItemsPre.forEach(item => {
+
+            // 아이템 부위
+            const cashItemSlot = document.createElement('div');
+            cashItemSlot.className = 'cashItem_slot'
+            charCashItemDiv.appendChild(cashItemSlot);
+            cashItemSlot.innerText = `${item.cash_item_equipment_slot}`
+            // 아이템 이름을 추가
+            const cashItemName = document.createElement('div');
+            cashItemName.className = 'cashItem_name'
+            charCashItemDiv.appendChild(cashItemName);
+            cashItemName.innerText = `${JSON.stringify(item.cash_item_name)}`;
+        });
+
+        adCashItemsPre.forEach(item => {
+
+            // 아이템 부위
+            const cashItemSlot = document.createElement('div');
+            cashItemSlot.className = 'cashItem_slot'
+            charCashItemDiv.appendChild(cashItemSlot);
+            cashItemSlot.innerText = `${item.cash_item_equipment_slot}`
+            // 아이템 이름을 추가
+            const cashItemName = document.createElement('div');
+            cashItemName.className = 'cashItem_name'
+            charCashItemDiv.appendChild(cashItemName);
+            cashItemName.innerText = `${JSON.stringify(item.cash_item_name)}`;
+        });
+    }
 }
 
+// 인기도 가져옴
+async function getPopularity(ocid){
+    try {
+        // 컨트롤러에 전송할 url(ocid)
+        const urlString = `/api/getPopularity?ocid=${encodeURIComponent(ocid)}`;
+        const response = await fetch(urlString); // fetch 사용
+        const data = await response.json();      // 응답을 JSON으로 변환
 
+        return data;
+    }
+    catch (error) {
+    console.error("getPopularity 에러:", error);
+    throw error;
+    }
+}
