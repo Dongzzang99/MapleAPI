@@ -31,8 +31,8 @@
 .Top{
     display: flex;
     gap: 8px;
-    width: fit-content;
-    padding: 5px 5px 5px 10px;
+    width: 100%;
+    padding: 10px 10px 10px 10px;
 }
 .Bottom{
     display: flex;
@@ -54,7 +54,8 @@
 .starCon{
     background-color: rgb(245, 244, 189);
     display: flex;
-    width: fit-content;
+    width: 40px;
+    justify-content: center;
     padding: 3px 5px 3px 5px;
     border-radius: 3px;
     gap: 5px;
@@ -89,8 +90,10 @@
 }
 
 .equiIcon{
-    width: fit-content;
-    height: 50px;
+   /* width: fit-content;
+    height: 50px;*/
+    height: inherit;
+    object-fit: contain;
     border-radius: 5px;
 }
 
@@ -118,4 +121,17 @@
 display: flex;
 flex-direction: column;
 justify-content:center;
+}
+.equi_Info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 50px;
+}
+.sidRingLevel{
+ background-color: rgb(219 213 237);
+ width: 40px;
+ border-radius: 3px;
+ font-size: 12px;
+ text-align: center;
 }
