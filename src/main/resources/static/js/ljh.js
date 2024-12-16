@@ -128,20 +128,26 @@ async function renderCharBasic(CharBasicData, CharPopularity){
     ];
 
     charBasicDiv.innerHTML = "";
+    charBasicParentDiv = document.createElement('div');
+    charBasicParentDiv.id  = "charBasicParentDiv";
 
     basicInfoList.forEach(info => {
-
+        const labelAndValueDiv = document.createElement("div");
+        labelAndValueDiv.className = "labelAndValue";
         const infoLabel = document.createElement('div');
+
         infoLabel.className = 'basic_info_label'; // 공통 클래스 추가
         infoLabel.innerText = `${info.label}`;
-        charBasicDiv.appendChild(infoLabel); // 부모 div에 추가
+        labelAndValueDiv.appendChild(infoLabel); // 부모 div에 추가
 
         const infoValue = document.createElement('div');
         infoValue.className = 'basic_info_value'; // 공통 클래스 추가
         infoValue.innerText = `${info.value}`; // 텍스트 설정
-        charBasicDiv.appendChild(infoValue); // 부모 div에 추가
-    });
+        labelAndValueDiv.appendChild(infoValue); // 부모 div에 추가
 
+         charBasicParentDiv.appendChild(labelAndValueDiv);
+         charBasicDiv.appendChild(charBasicParentDiv);
+    });
 }
 
 //장착 캐시탬 정보 가져옴

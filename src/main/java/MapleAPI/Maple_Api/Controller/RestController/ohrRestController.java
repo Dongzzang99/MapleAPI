@@ -6,13 +6,10 @@ import MapleAPI.Maple_Api.Repository.JobsMainStatRepository;
 import MapleAPI.Maple_Api.Repository.JobsRepository;
 import MapleAPI.Maple_Api.Repository.StatsRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -23,7 +20,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @Slf4j
-public class ohrController {
+public class ohrRestController {
     String equiUri = "https://open.api.nexon.com/maplestory/v1/character/";
     // API_KEY
     @Value("${api.nexon.key}")
@@ -39,11 +36,11 @@ public class ohrController {
 
     // 캐릭터 장비 정보 들고오기
     @GetMapping("/api/characterEquipment")
-    public Mono<ResponseEntity<String>> getEquiments(@RequestParam String ocid){
+    public Mono<ResponseEntity<String>> getEquiments(@RequestParam String ocid) {
         log.info("캐릭터 장비 정보 들고오기");
         return webClient.get()
                 // 해당 url로 정보 요청
-                .uri(equiUri+"item-equipment?ocid=" + ocid)
+                .uri(equiUri + "item-equipment?ocid=" + ocid)
                 // 보낼 해더값 설정
                 .header("x-nxopen-api-key", API_KEY)
                 // 응답 받아서 응답 처리
@@ -60,10 +57,10 @@ public class ohrController {
 
     // 캐릭터 직업 정보를 받아서 주스텟 가져오기
     @GetMapping("/api/class/mainStat")
-       public List<String> getMainStats(@RequestParam  String jobName){
-         // 직업 이름을 가져와서 해당하는 J_id값 Jobs에서 가져오기
-         String job_Id = jobsRepository.findByName(jobName).orElse(null);
-         log.info("job_Id"+ job_Id);
+    public List<String> getMainStats(@RequestParam String jobName) {
+        // 직업 이름을 가져와서 해당하는 J_id값 Jobs에서 가져오기
+        String job_Id = jobsRepository.findByName(jobName).orElse(null);
+        log.info("job_Id" + job_Id);
         // J_id 값을 사용하여 JobsMainStat 테이블에서 주스탯 S_id값 가져오기
         List<JobsMainStat> mainStatList = jmsRepository.findByJobId(job_Id);
         log.info("mainStatList" + mainStatList);
@@ -85,9 +82,8 @@ public class ohrController {
                 .collect(Collectors.toList());
         log.info("statNameList" + mainStatNameList);
 
-           return mainStatNameList;
-      }
-
+        return mainStatNameList;
+    }
 
 
 }

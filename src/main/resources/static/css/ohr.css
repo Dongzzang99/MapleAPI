@@ -4,6 +4,9 @@
     padding: 0;
     margin: 0;
 }
+body{
+margin:5% 20%;
+}
 #AllEquiments{
     background-color: rgb(232, 234, 236);
     width: 100%;
@@ -16,7 +19,7 @@
     grid-template-columns: repeat(3, 1fr); /* 8개씩 배치 */
     gap: 20px; /* 아이템 사이의 간격 */
     padding: 30px 20px 30px 20px;
-    max-height: 527px; /* 처음에 보여줄 영역 높이 제한 */
+    max-height: 440px; /* 처음에 보여줄 영역 높이 제한 */
     overflow: hidden; /* 높이를 넘는 장비는 숨김 */
     transition: max-height 0.3s ease-in-out; /* 높이 변화에 애니메이션 추가 */
 }
@@ -38,7 +41,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 1px;
+    gap: 5px;
     border-top: 1px solid rgb(232, 234, 236);
     padding: 5px 0px 5px 0px;
 }
@@ -78,12 +81,10 @@
 .potCon>.potInfo{
     font-size: 13px;
     color: rgb(145, 64, 145);
-    font-weight: bold;
 }
 .addiCon>.addiInfo{
     font-size: 13px;
     color: rgb(114, 205, 114);
-    font-weight: bold;
 }
 .potCon>.pot,.addiCon>.addi{
     font-size: 13px;
@@ -134,4 +135,53 @@ justify-content:center;
  border-radius: 3px;
  font-size: 12px;
  text-align: center;
+}
+
+#equiButtonsDiv{
+    padding:10px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color :#007bff;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+.equi-Preset-Buttons{
+background-color: rgb(255, 255, 255);
+color: #007bff;
+border: 0;
+text-align: center;
+font-weight: bold;
+width: 20px;
+padding: 5px;
+border-radius:5px;
+height: -webkit-fill-available;
+}
+.equi-Preset-Buttons.active {
+    background-color: #fff381; /* 활성화된 버튼 배경색 */
+    color: #ff7b00; /* 활성화된 상태의 글자색 */
+    border: 1px solid #636362;
+}
+#VaildOption{
+background-color: rgb(255, 255, 255);
+color: #007bff;
+border: 0;
+text-align: center;
+font-weight: bold;
+padding:5px;
+border-radius:5px;
+height: -webkit-fill-available;
+height: -webkit-fill-available;
+}
+
+#VaildOption.active {
+    background-color:#ff7b00; /* 활성화된 버튼 색상 */
+    color: #fff; /* 텍스트 색상 */
+    border: 1px solid #7e4e1b;
+}
+
+
+#characterForm{
+    margin-bottom: 5%;
 }
