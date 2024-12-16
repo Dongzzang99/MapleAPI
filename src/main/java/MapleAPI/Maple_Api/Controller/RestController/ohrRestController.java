@@ -8,6 +8,7 @@ import MapleAPI.Maple_Api.Repository.StatsRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,7 +22,13 @@ import java.util.stream.Collectors;
 @RestController
 @Slf4j
 public class ohrRestController {
+    //전투 장비 관련 정보 요청 uri
     String equiUri = "https://open.api.nexon.com/maplestory/v1/character/";
+
+    //유니온 정보 관련 정보 요청 uri
+    String unionUri = "https://open.api.nexon.com/maplestory/v1/user/union";
+
+
     // API_KEY
     @Value("${api.nexon.key}")
     private String API_KEY;
@@ -86,5 +93,31 @@ public class ohrRestController {
     }
 
 
+    // 유니온 정보 들고오기
+    @GetMapping("/api/union/basic")
+    public Mono<ResponseEntity<String>> getUnionBasic(@RequestParam String ocid) {
+        log.info("유니온 정보 들고오기");
+        return webClient.get()
+                // 해당 url로 정보 요청
+                .uri(unionUri + "?ocid=" + ocid)
+                // 보낼 해더값 설정
+                .header("x-nxopen-api-key", API_KEY)
+                // 응답 받아서 응답 처리
+                .retrieve()
+                // 받아온 정보를 String타입으로 변경
+                // .class가 붙는 이유는 제네릭 타입을 지정해 줘야만 한기 때문이라고 함
+                .bodyToMono(String.class)
+                // 응답 값 출력
+                //.doOnNext(response -> System.out.println("응답 값: " + response))
+                // 결과를 ResponseEntity타입으로 변형해 결과 확인
+                .map(response -> ResponseEntity.status(HttpStatus.OK).body(response));
+    }
+
+
+    // 유니온 공격대 정보 들고오기
+//    @GetMapping("/api/union/raider")
+//
+//    // 유니온 아티팩트 정보 들고오기
+//    @GetMapping("/api/union/artifact")
 }
 
