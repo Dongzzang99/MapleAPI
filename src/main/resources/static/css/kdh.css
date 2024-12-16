@@ -1,0 +1,83 @@
+.skill-container {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.skill-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    padding :5px;
+}
+
+.skill-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 5px;
+    margin-bottom: 8px;
+    height: 40px; /* 고정 높이로 설정 */
+    width: 30%; /* 부모 skill-container의 너비에 맞춤 */
+    border-radius: 4px;
+}
+
+.skill-level {
+    display: flex;
+    justify-content: center; /* 텍스트를 가운데 정렬 */
+    align-items: center;
+    text-align: center; /* 텍스트 가운데 정렬 */
+    font-size: 12px;
+    font-weight: normal;
+    color: #666;
+    background-color: #f5f5f5;
+    padding: 5px;
+    margin-top: 5px;
+    height: 30px; /* 고정 높이 설정 */
+    width: 10%; /* 부모 컨테이너 너비에 맞춤 */
+    border-radius: 4px;
+    border: 1px solid #ddd;
+
+}
+
+
+.skill-container p {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    color: gray;
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+}
+
+.skill-progress {
+    width: 100%;
+    height: 15px;
+    border-radius: 10px;
+    background-color: #eee;
+}
+
+.skill-progress::-webkit-progress-bar {
+    border-radius: 10px;
+    background-color: #f3f3f3;
+}
+
+.skill-progress::-webkit-progress-value {
+    border-radius: 10px;
+    background-color: #4caf50;
+}
+
+.progress-text {
+    font-size: 12px;
+    color: #333;
+}

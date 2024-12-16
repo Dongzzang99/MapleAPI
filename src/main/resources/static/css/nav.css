@@ -1,0 +1,48 @@
+/* 처음엔 안보임 */
+.post {
+  display: none;
+}
+
+/* 선택된 게시물만 보이게 함 */
+.post.active {
+  display: block;
+}
+
+/* 네비게이션 바 스타일 */
+#nav {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    background-color: #f9f9f9; /* 전체 배경 */
+    border-radius: 10px; /* 모서리 둥글게 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 */
+    padding: 0 10px; /* 내부 여백 */
+}
+
+/* 버튼 스타일 */
+#nav button {
+    flex: 1; /* 버튼이 균등하게 크기를 차지 */
+    padding: 0 10px;
+    height: 100%; /* 버튼 높이 */
+    border: none; /* 기본 테두리 제거 */
+    background-color: transparent; /* 기본 배경 제거 */
+    color: #666; /* 기본 글자색 */
+    font-size: 14px; /* 글자 크기 */
+    font-weight: bold; /* 글자 굵기 */
+    cursor: pointer; /* 클릭 가능 표시 */
+    transition: background-color 0.3s, color 0.3s; /* 애니메이션 */
+}
+
+/* 활성화된 버튼 */
+#nav button.active {
+    background-color: #6FCF97; /* 활성화된 버튼 배경색 */
+    color: white; /* 활성화된 버튼 글자색 */
+    border-radius: 10px 0 0 10px; /* 활성화된 버튼만 모서리 둥글게 */
+}
+
+/* 버튼 hover 효과 */
+#nav button:hover {
+    background-color: #e0e0e0; /* hover 시 배경 */
+}
