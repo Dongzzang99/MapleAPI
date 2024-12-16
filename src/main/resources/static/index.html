@@ -5,27 +5,45 @@
     <title>Maple_API</title>
     <link rel="stylesheet" href="/css/ohr.css">
     <link rel="stylesheet" href="/css/ljh.css">
-
+    <link rel="stylesheet" href="/css/kdh.css">
+    <link rel="stylesheet" href="/css/nav.css">
 </head>
 <body>
-    <form id="characterForm" style="display:flex; justify-content:center;">
-        <div style="display: flex; width: 50%; justify-content:center; border:2px solid black; border-radius: 30px;">
-<!--           케릭터 이름 입력-->
-            <input id = "characterName" style="border:none" type = text placeholder="캐릭터 이름">
-            <button style="height:40px;" type="submit">검색</button>
-        </div>
-    </form>
-        <div id="charInfo"></div>
-        <div id="character-info"></div>
-        <div id="charEquiInfo"></div>
+<form id="characterForm" style="display:flex; justify-content:center;">
+    <div style="display: flex; width: 50%; justify-content:center; border:2px solid black; border-radius: 30px;">
+        <!--케릭터 이름 입력-->
+        <input id = "characterName" style="border:none" type = text placeholder="캐릭터 이름">
+        <button style="height:40px;" type="submit">검색</button>
+    </div>
+</form>
+  <div id="charInfo"></div>
+  <div id="character-info"></div>
+  <div id="hexaStat-info"></div>
+
+<div id="nav" style="display: none;">
+    <button id="showA">장비</button>
+    <button id="showB">헥사 스킬 강화</button>
+</div>
+
+
+<div id="content">
+  <div class="post active" id="charEquiInfo"></div>
+  <div class="post" id="characterSkill-info"></div>
+</div>
 
 
 
-    <script src="/js/ljh.js"></script>
-    <script src="/js/kdh.js"></script>
-    <script src="/js/ohr.js"></script>
 
-    <!--   <script src="/js/index.js"></script>-->
 
-    </body>
-    </html>
+  <script src="/js/ljh.js"></script>
+  <script src="/js/kdh.js"></script>
+
+  <script src="/js/ohr.js"></script>
+   <!-- nav관련 js 파일-->
+  <script src="/js/ex.js"></script>
+
+
+ <!-- <script src="/js/index.js"></script> -->
+
+</body>
+</html>

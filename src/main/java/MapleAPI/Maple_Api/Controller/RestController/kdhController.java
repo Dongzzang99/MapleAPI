@@ -14,7 +14,8 @@ public class kdhController {
     private static final String API_KEY = "live_ffad0c71b122257961b4ea0a8c596998a97b4b49a1fc8e84ce0fe4eee56decc38aecd546f3deb031c4102ab7e560094d";
     private static final String NEXON_API_URL = "https://open.api.nexon.com/maplestory/v1/";
     private static final String NEXON_API_CHARINFO = "https://open.api.nexon.com/maplestory/v1/character/stat";
-//https://open.api.nexon.com/maplestory/v1/character/basic?ocid=f21eb44c8b7d5c11c9b913363071d54f
+    //https://open.api.nexon.com/maplestory/v1/character/basic?ocid=f21eb44c8b7d5c11c9b913363071d54f
+
     @Autowired
     private WebClient webClient;
 
@@ -42,6 +43,7 @@ public class kdhController {
                 .map(response -> ResponseEntity.ok(response));
     }
 
+    //ocid 값을 사용하여 캐릭터의 스텟 들고오기
     @GetMapping("/api/useOcid")
     //ocid 값을 js 에서 들고오기
     public Mono<ResponseEntity<String>> getCharacterInfo(@RequestParam String ocid) {
@@ -55,7 +57,11 @@ public class kdhController {
                 .doOnNext(response -> System.out.println("캐릭터 정보 값: " + response))
                 .map(response -> ResponseEntity.ok(response));
     }
+
+
+
+
     // /maplestory/v1/character/stat
     // /maplestory/v1/id -- ocid
-// /maplestory/v1/character/basic -- 캐릭터 정보
+    // /maplestory/v1/character/basic -- 캐릭터 정보
 }
