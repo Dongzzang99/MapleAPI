@@ -82,6 +82,35 @@ function renderCharacterInfo(characterData) {
     characterInfoDiv.appendChild(otherStatsContainer);
 }
 
+//5차 강화 솔에르다 조각 계산
+function soleErdaPiece5th(currentLevel, inputLevel) {
+
+    const soleerdaFragments = [
+     0,4,1,1,1,2,2,2,3,3,8,
+    3,3,3,3,3,3,3,3,4,
+    12,4,4,4,4,4,5,5,5,6,15
+    ];
+
+
+    // 솔 에르다 조각 데이터 (0레벨부터 30레벨까지)
+    const erdaFragments = [
+        0,75, 23, 27, 30, 34, 38, 42, 45, 49, 150,
+        60, 68, 75, 83, 90, 98, 105, 113, 120, 263,
+        128, 135, 143, 150, 158, 165, 173, 180, 188, 375
+    ];
+
+
+
+    // 현재 레벨부터 입력한 레벨까지 필요한 에르다 계산
+    const totalsoleerdaFragments = soleerdaFragments.slice(currentLevel+1, inputLevel + 1).reduce((sum, value) => sum + value, 0);
+    // 현재 레벨부터 입력한 레벨까지 필요한 조각 계산
+    const totalFragments = erdaFragments.slice(currentLevel+1, inputLevel + 1).reduce((sum, value) => sum + value, 0);
+     return { totalFragments, totalsoleerdaFragments };
+
+}
+console.log("5차 강화 솔에르다 Test: ",soleErdaPiece5th(1, 30));
+
+
 // 캐릭터 스킬 정보를 렌더링하는 함수
 function renderCharacterSkills(characterSkillData) {
     if (!characterSkillData) {
@@ -110,7 +139,7 @@ function renderCharacterSkills(characterSkillData) {
             className: 'skill-level',
         });
 
-
+        //각 스킬칸 마다 만들어지는 div
         const skillProgressContainer = document.createElement('div');
         skillProgressContainer.className = 'progress-container';
 
@@ -119,14 +148,58 @@ function renderCharacterSkills(characterSkillData) {
         skillProgress.value = skill.skill_level;
         skillProgress.className = 'skill-progress';
 
-        const skillProgressText = document.createElement('span');
-        skillProgressText.textContent = `${skill.skill_level} / 30`;
-        skillProgressText.className = 'progress-text';
+        //목표 레벨 입력 칸
+        const skillProgressText = document.createElement('input');
+        skillProgressText.value = `${skill.skill_level}`;
+        skillProgressText.className = 'progress-levelInput';//'progress-text' -> 'progress-levelInput' 변경
+
+        //조각 결과 값 나오는 p 공간 생성
+        const piecedisplayValue = document.createElement('p');
+        piecedisplayValue.textContent = "0";
+        // skillProgressContainer에 p 태그 추가
+
+        //조각 결과 값 나오는 p 공간 생성
+        const displayValue = document.createElement('p');
+        displayValue.textContent = "0";
+        // skillProgressContainer에 p 태그 추가
+
+        //실시간으로 input 값 확인
+        skillProgressText.addEventListener('input', () => {
+            const currentLevel = parseInt(skill.skill_level, 10);
+            const goalLevel = parseInt(skillProgressText.value, 10); // 실시간으로 값 읽기
+            if (!isNaN(goalLevel)) {
+                const { totalFragments } =soleErdaPiece5th(currentLevel,goalLevel);
+                const { totalsoleerdaFragments } =soleErdaPiece5th(currentLevel,goalLevel);
+
+                displayValue.textContent =`${totalsoleerdaFragments}`;
+                piecedisplayValue.textContent =`${totalFragments}`;
+            } else { //1~30 까지의 값이 아니먄 x를 표현합니다.
+                displayValue.textContent = piecedisplayValue.textContent = "X";
+            }
+        });
+
+
+
+        //솔 에르다 이미지 넣기
+        const sole_erda = document.createElement('img');
+        sole_erda.src= 'img/sole_erda.png';
+        sole_erda.className="sole_erda_img"
+
+        const sole_erda_piece = document.createElement('img');
+          sole_erda_piece.src= 'img/sole_erda_piece.png';
+          sole_erda_piece.className="sole_erda_img"
+
+
+
 
         skillProgressContainer.appendChild(skillProgress);
         skillProgressContainer.appendChild(skillProgressText);
         skillContainer.appendChild(skillProgressContainer);
-
+        //솔에르다 이미지
+        skillProgressContainer.appendChild(sole_erda);
+        skillProgressContainer.appendChild(displayValue);
+        skillProgressContainer.appendChild(sole_erda_piece);
+        skillProgressContainer.appendChild(piecedisplayValue);// 필요한 조각 값 띄우기
         characterInfoDiv.appendChild(skillContainer);
     });
 }
@@ -179,7 +252,7 @@ function formatNumber(num) {
     }
 }
 
-// 스타일 속성을 적용하며 요소를 생성하는 함수
+// 스타일 속성을 적용하며 요소를 생성하는 함수 (수정 예정)
 function appendStyledElement(parent, tagName, textContent = '', styles = {}) {
     const element = document.createElement(tagName);
     if (textContent) element.innerHTML = textContent;
