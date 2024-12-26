@@ -211,6 +211,15 @@ function renderEquiments(equipmentsInfo,excludedStarforcParts,excludedStarforceI
     // 장비정보들을 담은 박스의 부모
     const charEquiInfo = document.getElementById("charEquiInfo");
     charEquiInfo.innerHTML = "";
+    // 검색 버튼 눌렀을 때 해당 div 안보이게 하기 안그러면 같이 나옴
+    const postB = document.getElementById("characterSkill-info");
+    const postC = document.getElementById("unionInfo");
+    postB.classList.remove("active"); // A 게시물 보이기
+    postC.classList.remove("active"); // A 게시물 보이기
+    charEquiInfo.classList.add("active"); // A 게시물 보이기
+
+
+
     // 장비탭 관련 버튼을 담을 부모 박스
     const equiButtonsDiv = document.createElement('div');
     equiButtonsDiv.id = "equiButtonsDiv";
