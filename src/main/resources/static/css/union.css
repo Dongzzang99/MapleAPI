@@ -1,0 +1,370 @@
+#unionInfo{
+    margin-top: 15px;
+}
+#unionInfoDiv{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#unionArtifactInfoDiv{
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    background-color: #7db3f7;
+    border: 1px solid #868688;
+}
+#unionArtifactTitle, #unionRaiderTitle{
+    color: #fafdff;
+    background-color: #3c41ce;
+    padding: 10px;
+    font-weight: bold;
+    border-top-right-radius: 9px;
+    border-top-left-radius: 9px;
+}
+#unionArtifactDiv{
+    display: flex;
+    justify-content: space-between;
+}
+#unionArtifactEffetsDiv{
+    background-color: #f2f2f2;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom-right-radius: 10px;
+}
+#unionArtifactLevel{
+    font-size: 20px;
+    font-weight: bold;
+    color: #323436;
+    text-align: center;
+}
+.effectNameAndLevels{
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* 세로 방향 중앙 정렬 */
+    justify-content: flex-start; /* 왼쪽 정렬 */
+    gap:10px;
+    background: #ffffff;
+    padding: 5px;
+}
+.union_artifact_effect_level{
+    background:#ffffff;
+    border-radius: 3px;
+    padding: 5px;
+    width: 50px;
+    text-align: center;
+    font-size: 15px;
+    gap: 10px;
+    font-weight: bold;
+    color: #007bff;
+    border: 1px solid;
+}
+.union_artifact_effect{
+    font-size: 13px;
+}
+#artifactEffects{
+    padding: 20px 40px 40px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+#unionArtifactLevel{
+    padding-top: 20px;
+}
+#unionArtifactImgDiv{
+    width: 50%;
+    display:grid;
+    grid-template-columns: repeat(3, 1fr); /* 가로 3열 설정 */
+    gap: 20px; /* 이미지 사이 여백 설정 */
+     justify-items: center; /* 가로 중앙 정렬 */
+     align-items: center; /* 세로 중앙 정렬 */
+     padding: 20px;
+     border-bottom-left-radius: 10px;
+}
+.imgsDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 5px;
+    background-color: rgba(255, 255, 255, 0.1); /* 선택사항 */
+    border-radius: 10px; /* 둥근 모서리 */
+    width: 150px; /* 부모 요소를 꽉 채우도록 */
+    height: 150px;
+    padding:10px;
+    box-shadow: 1px 1px 13px #b28bd3;
+}
+.crystalImg{
+   width: 90px; /* 부모 요소를 꽉 채우도록 */
+   height: 90px;
+    object-fit: contain; /* 이미지 비율 유지하면서 꽉 채우기 */
+}
+.artifactCrystalLevel{
+    width:40px;
+    text-align:center;
+    font-weight: bold;
+    color: #9a29cb;
+    opacity: 70%;
+}
+.crystalOptions{
+    display: flex;
+    gap: 10px;
+}
+
+.crystalOptions span{
+    font-size:14px;
+    text-align:center;
+    width: fit-content;
+    height: fit-content;
+    color:white;
+    text-shadow: 1px 1px 10px #8f00ff;
+}
+#unionGradeAndLevel{
+    display: flex;
+    gap: 20px;
+    background: #6884a9;
+    padding:5px;
+    justify-content: center;
+    align-items: center;
+
+}
+#unionStatsDiv{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+    padding: 10px;
+}
+#unionRaiderDiv{
+    display: flex;
+    justify-content: space-between;
+}
+#unionRaiders{
+    background: #7eb3f9;
+}
+#unionEffects{
+    width:100%;
+}
+.unionRaiderStat{
+    background: #ffffff;
+    padding: 5px;
+    font-size: 11px;
+    color: #007bff;
+    border: 1px solid #bfbfbf;
+}
+#allUnionCharacters{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    background: #7eb3f8;
+    padding: 10px;
+}
+#unionGradeAndImgDiv{
+    display:flex;
+    gap:5px;
+}
+#unionGradeImg{
+    width:16px;
+    object-fit: contain;
+}
+#unionGrade{
+    padding: 3px 0 0 0;
+    color: #ffffff;
+    font-weight: bold;
+}
+#unionLevel{
+     padding: 3px 0 0 0;
+     font-size: 13px;
+     color: #333333;
+}
+#unionRaiderInfoDiv{
+   background: #d2e3f9;
+   border-radius: 10px;
+}
+.unionRaiderJobImgDiv {
+    width: 30px; /* div의 너비를 50px로 설정 */
+    height: 30px; /* div의 높이를 50px로 설정 */
+    overflow: hidden; /* div 영역을 넘어가는 이미지는 숨김 */
+    display: flex; /* 중앙 정렬을 위해 flex 사용 */
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    border: 1px solid #000000;
+}
+.unionRaiderJobAndRating {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+    font-weight:bold;
+}
+.unionRaiderJobAndRating img{
+    width: 210%; /* 이미지가 div를 채우도록 설정 */
+    padding: 0 0 5px 0;
+}
+.unionRaiderCharacter{
+    display: flex;
+    gap: 5px;
+    grid-template-columns: repeat(2, 1fr);
+    /* justify-content: center; */
+    align-items: flex-end;
+    height: fit-content;
+    background: #ffffff;
+    width: 130px;
+    padding: 5px;
+    border-radius: 5px;
+}
+.unionJobAndLevelDiv{
+    display:flex;
+    flex-direction: column-reverse;
+    font-size: 12px;
+}
+.unionRaiderRating{
+     border-top-left-radius: 5px;
+     border-top-right-radius: 5px;
+     border: 1px solid #232323;
+     background: #9c2d2d;
+     padding: 2px 2px 0 2px;
+     color: #ffbe05;
+}
+#unionRaiderJobImgZero{
+    width:150%;
+}
+.unionJobLevel{
+    color: #797979;
+}
+#unionBoard{
+ padding:10px;
+}
+#unionBoardGrid{
+   background: linear-gradient(rgb(76, 79, 93) 0%, rgb(39, 40, 46) 100%);
+   position: relative;
+   width: 308px;
+   height: 280px;
+   display: flex;
+   flex-wrap: wrap;
+}
+#unionBoard img{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 2;
+    top: 0px;
+    left: 0px;
+    object-fit: cover;
+}
+.unionBlock{
+    width:14px;
+    height:14px;
+    background: rgb(210, 183, 153);
+    position: absolute;
+}
+#blockStatsDiv{
+    z-index: 3;
+}
+.blockStat{
+    position:absolute;
+    font-size: 11px;
+    color: #fffbf9;
+    text-shadow: 2px 2px 5px #715555;
+}
+#blockFixedStat0{
+    left: 70px;
+    top: 25px;
+}
+#blockFixedStat1{
+    left: 179px;
+     top: 25px;
+}
+#blockFixedStat2{
+    left: 1px;
+    top: 95px;
+}
+
+#blockFixedStat3{
+  left: 243px;
+  top: 95px;
+}
+
+#blockFixedStat4{
+   left: 10px;
+   top: 202px;
+}
+#blockFixedStat5{
+   left: 251px;
+   top: 202px;
+}
+
+#blockFixedStat6{
+    left: 70px;
+    top: 242px;
+}
+#blockFixedStat7{
+   left: 180px;
+   top: 242px;
+}
+#blockNonFixedStat0{
+    left: 115px;
+    top: 84px;
+}
+#blockNonFixedStat1{
+    left: 173px;
+    top: 84px;
+}
+#blockNonFixedStat2{
+   left: 200px;
+   top: 113px;
+}
+#blockNonFixedStat3{
+    left: 204px;
+    top: 156px;
+}
+#blockNonFixedStat4{
+    left: 174px;
+    top: 183px;
+}
+#blockNonFixedStat5{
+   left: 116px;
+   top: 183px;
+}
+#blockNonFixedStat6{
+    left: 88px;
+    top: 156px;
+}
+#blockNonFixedStat7{
+    left: 81px;
+    top: 113px;
+}
+#unionOccupiedStats{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 13px;
+    padding: 20px;
+    color: #af906c;
+}
+#unionBlockStatDiv{
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: linear-gradient(337deg, rgb(249 230 206) 0%, rgb(238 238 238) 35%, rgb(255 255 255) 100%);
+    box-shadow: 1px 1px 7px #5e5e5e;
+}
+#unionBoard{
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+#unionBlockStatTitle{
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(rgb(76, 79, 93) 0%, rgb(39, 40, 46) 100%);
+    color: #ffffff;
+    border-top-right-radius : 10px;
+    border-top-left-radius: 10px;
+    padding: 7px 0px 5px 0px;
+}
